@@ -109,7 +109,7 @@ class FlowerClient(fl.client.NumPyClient):
         loss, accuracy = test(net, testloader)
         return loss, len(testloader.dataset), {"accuracy": accuracy}
 
-
+print(f"Subscribing to FL server {server} on port {port}...")
 # Start Flower client
 fl.client.start_numpy_client(
     server_address=f"{server}:{port}",

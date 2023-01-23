@@ -19,6 +19,6 @@ spec:
         image: flower:latest
         imagePullPolicy: IfNotPresent
         command: ["/bin/sh", "-c"]
-        args: ["python ./src/client.py --server '10.110.255.49' --port '30051'"]
+        args: ["python ./src/client.py --server 'service-server' --port '30051'"]
         ports:
         - containerPort: 30051
