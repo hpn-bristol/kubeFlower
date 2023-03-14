@@ -16,7 +16,7 @@ spec:
     spec:
       containers:
       - name: kubeflower
-        image: flower:latest
+        image: kubeflower:latest
         imagePullPolicy: IfNotPresent
         command: ["/bin/sh", "-c"]
         args: ["python ./src/server.py"]
