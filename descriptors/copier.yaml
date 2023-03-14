@@ -1,0 +1,54 @@
+apiVersion: v1
+kind: PersistentVolume
+metadata:
+  name: my-pv
+spec:
+  storageClassName: standard
+  capacity:
+    storage: 5Gi
+  accessModes:
+    - ReadWriteOnce
+  hostPath:
+    path: /data/flower
+---
+apiVersion: v1
+kind: PersistentVolumeClaim
+metadata:
+  name: my-pvc
+spec:
+  accessModes:
+    - ReadWriteOnce
+  resources:
+    requests:
+      storage: 5Gi
+  selector:
+    matchLabels:
+      pv-name: my-pv
+---
+apiVersion: v1
+kind: Pod
+metadata:
+  name: my-pod
+spec:
+  initContainers:
+  - name: init
+    image: busybox
+    command: ['sh', '-c', 'cp -r /data/* /mnt/data']
+    volumeMounts:
+    - name: data
+      mountPath: /mnt/data
+    - name: my-pv
+      mountPath: /data
+  containers:
+  - name: my-container
+    image: flower:latest
+    volumeMounts:
+    - name: my-pv
+      mountPath: /data
+  volumes:
+  - name: my-pv
+    persistentVolumeClaim:
+      claimName: my-pvc
+  - name: data
+    hostPath:
+      path: /data/flower
