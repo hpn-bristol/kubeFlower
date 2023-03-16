@@ -12,13 +12,13 @@ def create_fldeployment(spec, **kwargs):
     server_spec = spec.get('server', {})
     client_spec = spec.get('client', {})
     
-    server_image = server_spec.get('image')
-    server_image_pull_policy = server_spec.get('imagePullPolicy', 'Always')
+    server_image = server_spec.get('image', 'kubeflower:latest')
+    server_image_pull_policy = server_spec.get('imagePullPolicy', 'IfNotPresent')
     server_port = server_spec.get('port', 80)
     server_replicas = server_spec.get('replicas', 1)
     
-    client_image = client_spec.get('image')
-    client_image_pull_policy = client_spec.get('imagePullPolicy', 'Always')
+    client_image = client_spec.get('image', 'kubeflower:latest')
+    client_image_pull_policy = client_spec.get('imagePullPolicy', 'IfNotPresent')
     client_port = client_spec.get('port', 30050)
     client_replicas = client_spec.get('replicas', 1)
     client_args = client_spec.get('args', [])
@@ -110,8 +110,8 @@ def create_fldeployment(spec, **kwargs):
                             "name": "fl-client",
                             "image": client_image,
                             "imagePullPolicy": client_image_pull_policy,
-                            #"command": ["/bin/sh", "-c"],
-                            "args": client_args,
+                            "command": ["/bin/sh", "-c"],
+                            "args": [f"python ./src/client.py --server {kwargs['body']['metadata']['name']}-service-server --port {client_port}"],
                             "ports": [
                                 {
                                     "containerPort": client_port

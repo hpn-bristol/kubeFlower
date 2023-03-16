@@ -2,15 +2,12 @@ apiVersion: flwr.dev/v1
 kind: FLDeployment
 metadata:
   name: fl-deployment
+  finalizers:
 spec:
   server:
     replicas: 1
-    image: kubeflower:latest
-    imagePullPolicy: IfNotPresent
     port: 8080
   client:
     replicas: 2
-    image: kubeflower:latest
-    imagePullPolicy: IfNotPresent
     port: 30051
  
