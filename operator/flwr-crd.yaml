@@ -48,6 +48,13 @@ spec:
                       type: integer
                     replicas:
                       type: integer
+                    privacy:
+                      type: object
+                      properties:
+                        budget:
+                          type: number
+                        rate:
+                          type: number
                     args:
                       type: array
                       items:

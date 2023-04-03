@@ -10,4 +10,7 @@ spec:
   client:
     replicas: 2
     port: 30051
+    privacy:
+      budget: 0.9
+      rate: 0.5 
  
