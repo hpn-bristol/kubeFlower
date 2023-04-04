@@ -172,7 +172,7 @@ def create_fldeployment(spec, **kwargs):
                     "volumes": [
                         {
                             "name": "my-volume",
-                            "persitentVolumeClaim": {
+                            "persistentVolumeClaim": {
                                 "claimName": "my-pvc"
                             }
                         }

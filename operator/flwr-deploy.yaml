@@ -8,7 +8,7 @@ spec:
     replicas: 1
     port: 8080
   client:
-    replicas: 2
+    replicas: 1
     port: 30051
     privacy:
       budget: 0.9
