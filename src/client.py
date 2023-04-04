@@ -67,9 +67,10 @@ def test(net, testloader):
 
 def load_data():
     """Load CIFAR-10 (training and test set)."""
+    print(f'Loading data from {datapath}')
     trf = Compose([ToTensor(), Normalize((0.5, 0.5, 0.5), (0.5, 0.5, 0.5))])
-    trainset = CIFAR10('../data', train=True, download=False, transform=trf)
-    testset = CIFAR10('../data', train=False, download=False, transform=trf)
+    trainset = CIFAR10(datapath, train=True, download=False, transform=trf)
+    testset = CIFAR10(datapath, train=False, download=False, transform=trf)
     return DataLoader(trainset, batch_size=32, shuffle=True), DataLoader(testset)
 
 
@@ -78,16 +79,18 @@ def load_data():
 # #############################################################################
 
 # Load model and data (simple CNN, CIFAR-10)
-net = Net().to(DEVICE)
-trainloader, testloader = load_data()
 parser = argparse.ArgumentParser(description="Launches FL clients.")
 parser.add_argument('-cid',"--cid", type=int, default=0, help="Define Client_ID",)
 parser.add_argument('-server',"--server", default="0.0.0.0", help="Server Address",)
 parser.add_argument('-port',"--port", default="8080", help="Server Port",)
+parser.add_argument('-data', "--data", default="./data", help="Dataset source path")
 args = vars(parser.parse_args())
 cid = args['cid']
 server = args['server']
 port = args['port']
+datapath = args['data']
+net = Net().to(DEVICE)
+trainloader, testloader = load_data()
 
 # Define Flower client
 class FlowerClient(fl.client.NumPyClient):

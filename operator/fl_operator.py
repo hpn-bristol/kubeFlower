@@ -13,13 +13,13 @@ def create_fldeployment(spec, **kwargs):
     server_spec = spec.get('server', {})
     client_spec = spec.get('client', {})
     
-    server_image = server_spec.get('image', 'kubeflower:latest')
+    server_image = server_spec.get('image', 'juanmarcelouob/kubeflower:latest')
     server_image_pull_policy = server_spec.get('imagePullPolicy', 'IfNotPresent')
     server_port = server_spec.get('port', 80)
     server_replicas = server_spec.get('replicas', 1)
     #########POTENTIALLY MAKE THE SERVER TO ORCHESTRATE THE PRIVACY BUDGET- FA TO KEEP TRACK OF THE BUDGET
     
-    client_image = client_spec.get('image', 'kubeflower:latest')
+    client_image = client_spec.get('image', 'juanmarcelouob/kubeflower:latest')
     client_image_pull_policy = client_spec.get('imagePullPolicy', 'IfNotPresent')
     client_port = client_spec.get('port', 30050)
     client_replicas = client_spec.get('replicas', 1)
@@ -54,7 +54,7 @@ def create_fldeployment(spec, **kwargs):
                             "image": server_image,
                             "imagePullPolicy": server_image_pull_policy,
                             "command": ["/bin/sh", "-c"],
-                            "args": ["python ./src/server.py"],
+                            "args": ["ls; python ./src/server.py"],
                             "ports": [
                                 {
                                     "containerPort": server_port
@@ -102,7 +102,7 @@ def create_fldeployment(spec, **kwargs):
                 "ReadWriteOnce"
             ],
             "hostPath": {
-                "path": "/data"
+                "path": "/home/ubuntu/git/kubeFlower/data"
             }
         }
     }
@@ -157,7 +157,7 @@ def create_fldeployment(spec, **kwargs):
                             "image": client_image,
                             "imagePullPolicy": client_image_pull_policy,
                             "command": ["/bin/sh", "-c"],
-                            "args": [f"python ./src/client.py --server {kwargs['body']['metadata']['name']}-service-server --port {client_port}"],
+                            "args": [f"ls; python ./src/client.py --server {kwargs['body']['metadata']['name']}-service-server --port {client_port}"],
                             "ports": [
                                 {
                                     "containerPort": client_port
@@ -166,7 +166,7 @@ def create_fldeployment(spec, **kwargs):
                             "volumeMounts":[
                                 {
                                     "name": "my-volume",
-                                    "mountPath": "/data"
+                                    "mountPath": "/data/"
                                 }
                             ]
                         }
