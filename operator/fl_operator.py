@@ -91,7 +91,10 @@ def create_fldeployment(spec, **kwargs):
         "apiVersion":"v1",
         "kind":"PersistentVolume",
         "metadata": {
-            "name":f"my-pv"
+            "name":f"my-pv",
+            "labels":{
+                "type": "local"
+            }
         },
         "spec":{
             "storageClassName" : "manual",
@@ -122,12 +125,7 @@ def create_fldeployment(spec, **kwargs):
             },
             "accessModes":[
                 "ReadWriteOnce"
-            ],
-            "selector": {
-                "macthLabels": {
-                    "pv-name": "my-pv"
-                }
-            }
+            ]
         }
     }
     client_deployment_body = {
