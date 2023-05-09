@@ -1,0 +1,25 @@
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: flower-server
+  labels:
+    app: flower-server
+spec:
+  replicas: 1
+  selector:
+    matchLabels:
+      app: flower-server 
+  template:
+    metadata:
+      labels:
+        app: flower-server 
+    spec:
+      containers:
+      - name: kubeflower
+        image: kubeflower:latest
+        imagePullPolicy: IfNotPresent
+        command: ["/bin/sh", "-c"]
+        args: ["python ./src/server.py"]
+        ports:
+        - containerPort: 8080
+        
