@@ -19,6 +19,6 @@ spec:
         image: kubeflower:latest
         imagePullPolicy: IfNotPresent
         command: ["/bin/sh", "-c"]
-        args: ["python ./src/client.py --server 'fl-deployment-service-server' --port '30051'"]
+        args: ["python ./src/client.py --server 'service-server' --port '30051'"]
         ports:
         - containerPort: 30051
