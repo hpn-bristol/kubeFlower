@@ -5,12 +5,11 @@ metadata:
   finalizers:
 spec:
   server:
-    replicas: 1
     port: 8080
   client:
-    replicas: 1
+    replicas: 5
     port: 30051
-    privacy:
-      budget: 0.9
-      rate: 0.5 
+    dataset:
+      download: true
+       
  

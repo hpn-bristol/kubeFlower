@@ -48,6 +48,13 @@ spec:
                       type: integer
                     replicas:
                       type: integer
+                    dataset:
+                      type: object
+                      properties:
+                        download:
+                          type: boolean
+                        path:
+                          type: string
                     privacy:
                       type: object
                       properties:

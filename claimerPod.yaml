@@ -3,14 +3,15 @@ kind: Pod
 metadata:
   name: my-pod
 spec:
+  nodeName: juan-2-mshed-gpu
   containers:
   - name: kubeflower
-    image: kubeflower:latest
+    image: juanmarcelouob/kubeflower:latest
     imagePullPolicy: IfNotPresent
     volumeMounts:
     - name: my-volume
-      mountPath: /usr/data
+      mountPath: /app/data/
   volumes:
   - name: my-volume
     persistentVolumeClaim:
-      claimName: my-pvc
+      claimName: my-pvc1

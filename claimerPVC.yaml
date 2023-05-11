@@ -1,7 +1,7 @@
 apiVersion: v1
 kind: PersistentVolume
 metadata:
-  name: my-pv
+  name: my-pv1
 spec:
   storageClassName: manual
   capacity:
@@ -9,12 +9,12 @@ spec:
   accessModes:
     - ReadWriteOnce
   hostPath:
-    path: /home/te22204/git/KubeFlower/data
+    path: /home/ubuntu/git/kubeFlower/data
 ---
 apiVersion: v1
 kind: PersistentVolumeClaim
 metadata:
-  name: my-pvc
+  name: my-pvc1
 spec:
   storageClassName: manual
   resources:
@@ -22,7 +22,4 @@ spec:
       storage: 1Gi
   accessModes:
     - ReadWriteOnce
-  selector:
-    matchLabels:
-      pv-name: my-pv
 
