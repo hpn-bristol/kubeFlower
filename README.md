@@ -113,4 +113,4 @@ To deploy this architecture you need to:
     minikube stop
     ```
 
-This is a simple implementation of container-based FL using Flower and K8s for orchestration. For further discussions/ideas/projects, please contact the developers.  
+This is a simple implementation of container-based FL using Flower and K8s for orchestration. For further discussions/ideas/projects, please contact the developers at the Smart Internet Lab.  
