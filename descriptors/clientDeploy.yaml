@@ -5,7 +5,7 @@ metadata:
   labels:
     app: flower-client
 spec:
-  replicas: 1
+  replicas: 2
   selector:
     matchLabels:
       app: flower-client 
@@ -14,12 +14,11 @@ spec:
       labels:
         app: flower-client 
     spec:
-      nodeName: juan-2-mshed-gpu
       containers:
       - name: kubeflower
-        image: juanmarcelouob/kubeflower:latest
-        imagePullPolicy: Always
+        image: kubeflower:latest
+        imagePullPolicy: IfNotPresent
         command: ["/bin/sh", "-c"]
-        args: ["python ./src/client.py --server 'fl-deployment-service-server' --port '30051' --download True"]
+        args: ["python ./src/client.py --server 'service-server' --port '30051'"]
         ports:
         - containerPort: 30051

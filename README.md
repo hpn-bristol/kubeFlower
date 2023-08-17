@@ -24,7 +24,11 @@ For this proof-of-concept, a K8s cluster is deployed locally using minikube. The
 ### Step-by-step setup
  1. Clone the present repository in the CLI.
  ```bash
+<<<<<<< HEAD
     git clone git@github.com:hpn-bristol/KubeFlower.git
+=======
+    git clone git@github.com:hpn-bristol/kubeFlower.git
+>>>>>>> 336b9ca356a88d137859e5a7f327782bc82eef29
  ```
  2. Go to the folder that contains Kubeflower 
  3. Point your terminal to use the docker deamon inside minikube     
@@ -113,4 +117,8 @@ To deploy this architecture you need to:
     minikube stop
     ```
 
+<<<<<<< HEAD
 This is a simple implementation of container-based FL using Flower and K8s for orchestration. For further discussions/ideas/projects, please contact the developers.  
+=======
+This is a simple implementation of container-based FL using Flower and K8s for orchestration. For further discussions/ideas/projects, please contact the developers at the Smart Internet Lab.  
+>>>>>>> 336b9ca356a88d137859e5a7f327782bc82eef29
