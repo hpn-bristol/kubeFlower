@@ -28,7 +28,7 @@ spec:
       imagePullSecrets:
         {{- toYaml . | nindent 8 }}
       {{- end }}
-      serviceAccountName: {{ include "server.serviceAccountName" . }}
+      serviceAccountName: {{ include "kubeflower-helm.serviceAccountName" . }}
       securityContext:
         {{- toYaml .Values.client.podSecurityContext | nindent 8 }}
       containers:
@@ -37,6 +37,7 @@ spec:
             {{- toYaml .Values.client.securityContext | nindent 12 }}
           image: "{{ .Values.client.image.repository }}:{{ .Values.client.image.tag | default .Chart.AppVersion }}"
           imagePullPolicy: {{ .Values.client.image.pullPolicy }}
+          {{- with .Values.client.ports }}
           ports:
             {{- toYaml . | nindent 8 }}
           {{- end }}

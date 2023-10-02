@@ -54,13 +54,21 @@ app.kubernetes.io/instance: {{ .Release.Name }}
 Create the name of the service account to use
 */}}
 {{- define "kubeflower-helm.serviceAccountName" -}}
-{{- if .Values.server.serviceAccount.create }}
-{{- default (include "kubeflower-helm.fullname" .) .Values.server.serviceAccount.name }}
+{{- if .Values.serviceAccount.create }}
+{{- default (include "kubeflower-helm.fullname" .) .Values.serviceAccount.name }}
 {{- else }}
-{{- default "default" .Values.server.serviceAccount.name }}
+{{- default "default" .Values.serviceAccount.name }}
 {{- end }}
 {{- end }}
 
+
+
+{{/*
+Expand the name of the chart.
+*/}}
+{{- define "client.name" -}}
+{{- default .Values.client.name .Chart.Version .Values.nameOverride | trunc 63 | trimSuffix "-" }}
+{{- end }}
 
 {{/*
 Create chart name and version as used by the chart label.
@@ -83,7 +91,7 @@ If release name contains chart name it will be used as a full name.
 {{- if contains $name .Release.Name }}
 {{- .Release.Name | trunc 63 | trimSuffix "-" }}
 {{- else }}
-{{- printf "%s-client" .Release.Name $name | trunc 63 | trimSuffix "-" }}
+{{- printf "%s-client" .Release.Name | trunc 63 | trimSuffix "-" }}
 {{- end }}
 {{- end }}
 {{- end }}
