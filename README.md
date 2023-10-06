@@ -1,7 +1,7 @@
 # KubeFlower: Kubernetes-based Federated Learning
 
 ## What is KubeFlower?
-Kubeflower is a project for exploting the benefits of cloud-native and container-based technologies for the development, deployment and workload management of Federated Learning (FL) pipelines. We use the open-source framework [Flower](https://flower.dev/) for the FL workload control. Flower has been widely adopted in industry and academy. In order increase computation elasticity and efficiency when deploying FL, we use the container orchestration system [Kubernetes](https://kubernetes.io/) (K8s). We use different concepts as FL server, FL clients, K8s clusters, K8s deployments, K8s pods, and K8s services. If you are not familiar with this terminology, please watch the following resources: [Federated Learning](https://youtu.be/nBGQQHPkyNY), [Kubernetes](https://youtu.be/s_o8dwzRlu4). 
+Kubeflower is a project for exploiting the benefits of cloud-native and container-based technologies for the development, deployment and workload management of Federated Learning (FL) pipelines. We use the open-source framework [Flower](https://flower.dev/) for the FL workload control. Flower has been widely adopted in industry and academia. In order to increase computation elasticity and efficiency when deploying FL, we use the container orchestration system [Kubernetes](https://kubernetes.io/) (K8s). We use different concepts such as FL servers, FL clients, K8s clusters, K8s deployments, K8s pods, and K8s services. If you are not familiar with this terminology, please watch the following resources: [Federated Learning](https://youtu.be/nBGQQHPkyNY), [Kubernetes](https://youtu.be/s_o8dwzRlu4). 
 
 ## Top-Level Features
 * Single and multi-node implementation.
@@ -9,7 +9,7 @@ Kubeflower is a project for exploting the benefits of cloud-native and container
 * Scalability through clustering of network device control.
 * CLI for debugging.
 * Applicable to real-world scenarios.
-* Extandable.
+* Extendable.
 * Cross-platform (Linux, macOS, Windows).
 
 ## Getting started
@@ -24,11 +24,7 @@ For this proof-of-concept, a K8s cluster is deployed locally using minikube. The
 ### Step-by-step setup
  1. Clone the present repository in the CLI.
  ```bash
-<<<<<<< HEAD
-    git clone git@github.com:hpn-bristol/KubeFlower.git
-=======
     git clone git@github.com:hpn-bristol/kubeFlower.git
->>>>>>> 336b9ca356a88d137859e5a7f327782bc82eef29
  ```
  2. Go to the folder that contains Kubeflower 
  3. Point your terminal to use the docker deamon inside minikube     
@@ -55,14 +51,14 @@ For this proof-of-concept, a K8s cluster is deployed locally using minikube. The
     ```bash
     minikube image list
     ```
-check that `kubeflower:latest` is in the list, where `latest` is the tag assigend to the docker image by default. 
+check that `kubeflower:latest` is in the list, where `latest` is the tag assigned to the docker image by default. 
 
  ### Step-by-step deployment
- Now you are ready for deploying the FL pipeline using K8s. We will be using K8s deployments to create K8s pods that will use a K8s service for communitacions. Each pod represents a FL actor with a main pod that will act as a FL server. The proposed architecture is depicted in the figure. 
+ Now you are ready for deploying the FL pipeline using K8s. We will be using K8s deployments to create K8s pods that will use a K8s service for communications. Each pod represents a FL actor with a main pod that will act as a FL server. The proposed architecture is depicted in the figure. 
 
  ![](images/kubeflower.png)
 
- The docker image `kubeflower` is used to deploy the containers with the Flower's pipeline and other dependencies. These containers are deployed in pods. The FL server Pod exposes port 8080 for the gRPC communication implemented by Flower. Instead of using a predefined IP for the server, we use K8s service `ClusterIP` that will allow to locate the FL server pod even if it restarts and change its IP. The service exposes the port 30051 that can be targeted by the FL Client Pods through `http:service-server:30051`. For the FL setup, we use the FL PyTorch implementation of Flower. This simple example can be found [here](https://flower.dev/docs/quickstart-pytorch.html). 
+ The docker image `kubeflower` is used to deploy the containers with the Flower's pipeline and other dependencies. These containers are deployed in pods. The FL server Pod exposes port 8080 for the gRPC communication implemented by Flower. Instead of using a predefined IP for the server, we use K8s service `ClusterIP` that will allow to locate the FL server pod even if it restarts and change its IP. The service exposes the port 30051 which can be targeted by the FL Client Pods through `http:service-server:30051`. For the FL setup, we use the FL PyTorch implementation of Flower. This simple example can be found [here](https://flower.dev/docs/quickstart-pytorch.html). 
 
 To deploy this architecture you need to:
 
@@ -77,7 +73,7 @@ To deploy this architecture you need to:
     ```bash
     kubectl apply -f descriptors/serverDeploy.yaml
     ```
-    By default the server will start a run of 5 rounds when 2 clients are available. To change thess values, edit the `serverDeploy.yaml` file. Different values should be passed as argumments in the line ```args: ["python ./src/server.py"]```. Possible values are: --clients, --min, --rounds.   
+    By default, the server will start a run of 5 rounds when 2 clients are available. To change thess values, edit the `serverDeploy.yaml` file. Different values should be passed as arguments in the line ```args: ["python ./src/server.py"]```. Possible values are: --clients, --min, --rounds.   
 3. Check the SELECTOR for both the service and deployment. They should match `app=flower-server`.
     ```bash
     kubectl get all -owide
@@ -89,7 +85,7 @@ To deploy this architecture you need to:
     kubectl apply -f descriptors/clientDeploy.yaml
     ```
 
-    By default this descriptor will deploy 2 clients. To increase the number of clients, edit the `replicas: 2` value in the .yaml file. 
+    By default, this descriptor will deploy 2 clients. To increase the number of clients, edit the `replicas: 2` value in the .yaml file. 
 5. Monitor the training process. 
     ```bash
     kubectl get all
@@ -116,9 +112,5 @@ To deploy this architecture you need to:
 
     minikube stop
     ```
-
-<<<<<<< HEAD
-This is a simple implementation of container-based FL using Flower and K8s for orchestration. For further discussions/ideas/projects, please contact the developers.  
-=======
 This is a simple implementation of container-based FL using Flower and K8s for orchestration. For further discussions/ideas/projects, please contact the developers at the Smart Internet Lab.  
->>>>>>> 336b9ca356a88d137859e5a7f327782bc82eef29
+
